@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>@ViewBag.Title - SJSD Triple C</title>
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <meta name="viewport" content="width=device-width" />
+        @RenderSection("styles", required: false)
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
+    </head>
+    <body>
+        <header>
+            <div class="content-wrapper">
+                <div class="float-left">
+                    <p class="site-title"><a href="@Url.Action("Index", "Home")"><img src="~/Images/triple-c-logo.png" width="75px" /></a></p>
+                </div>
+                <div class="float-right header-container">
+                    <div class="float-left">
+                        <img src="~/Images/triple-c-header.png" />
+                    </div>
+                    <section id="login">
+                        Hello, <span class="username">@User.Identity.Name</span>!
+                    </section>
+                    <nav class="float-right">
+                        <ul id="menu">
+                            <!--<li>@Html.ActionLink("Home", "Index", "Home")</li>-->
+                       </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+        <div id="body">
+            @RenderSection("featured", required: false)
+            
+            <section class="content-wrapper main-content clear-fix">
+               @{
+                   String message = null;
+                   String success = null;
+                   if (HttpContext.Current.Session["message"] != null)
+                   {
+                       message = (String)HttpContext.Current.Session["message"];
+                       HttpContext.Current.Session["message"] = null;
+                       success = (String)HttpContext.Current.Session["success"];
+                       success = success != null && success.ToLower() != "true" ? "error-message" : "success-message";
+                       HttpContext.Current.Session["success"] = null;
+                   }
+                   if (message != null)
+                   {
+                        <div class="@success">
+                            <p>@message</p>
+                        </div>
+                   }
+                }
+                @RenderBody()
+            </section>
+        </div>
+        <footer>
+            <div class="content-wrapper">
+                <div class="float-left">
+                    <p>&copy; @DateTime.Now.Year - SJSD Triple-C</p>
+                </div>
+            </div>
+        </footer>
+
+        @Scripts.Render("~/bundles/jquery")
+        <script type="text/javascript">
+            $('[data-val-required]:not(:checkbox)').after('<span class="required"> *</span>');
+        </script>
+        @RenderSection("scripts", required: false)
+    </body>
+</html>

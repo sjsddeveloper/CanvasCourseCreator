@@ -1,0 +1,367 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SJSDDBModelStoreContainer" CdmEntityContainer="SJSDDBEntities">
+    <EntitySetMapping Name="courses">
+      <EntityTypeMapping TypeName="SJSDDBModel.course">
+        <MappingFragment StoreEntitySet="course">
+          <ScalarProperty Name="crsuniq" ColumnName="crsuniq" />
+          <ScalarProperty Name="coursec" ColumnName="coursec" />
+          <ScalarProperty Name="descript" ColumnName="descript" />
+          <ScalarProperty Name="crscats" ColumnName="crscats" />
+          <ScalarProperty Name="deptc" ColumnName="deptc" />
+          <ScalarProperty Name="sectsize" ColumnName="sectsize" />
+          <ScalarProperty Name="tasize" ColumnName="tasize" />
+          <ScalarProperty Name="crsstatc" ColumnName="crsstatc" />
+          <ScalarProperty Name="trmdur" ColumnName="trmdur" />
+          <ScalarProperty Name="perdur" ColumnName="perdur" />
+          <ScalarProperty Name="lograden" ColumnName="lograden" />
+          <ScalarProperty Name="higraden" ColumnName="higraden" />
+          <ScalarProperty Name="altc" ColumnName="altc" />
+          <ScalarProperty Name="genderenrl" ColumnName="genderenrl" />
+          <ScalarProperty Name="isschedule" ColumnName="isschedule" />
+          <ScalarProperty Name="takeattnd" ColumnName="takeattnd" />
+          <ScalarProperty Name="countattnd" ColumnName="countattnd" />
+          <ScalarProperty Name="conflictok" ColumnName="conflictok" />
+          <ScalarProperty Name="flag1" ColumnName="flag1" />
+          <ScalarProperty Name="flag2" ColumnName="flag2" />
+          <ScalarProperty Name="asgngrades" ColumnName="asgngrades" />
+          <ScalarProperty Name="posttohist" ColumnName="posttohist" />
+          <ScalarProperty Name="varcr" ColumnName="varcr" />
+          <ScalarProperty Name="crsnotes" ColumnName="crsnotes" />
+          <ScalarProperty Name="snreserve1" ColumnName="snreserve1" />
+          <ScalarProperty Name="snreserve2" ColumnName="snreserve2" />
+          <ScalarProperty Name="CoreID" ColumnName="CoreID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="facdemoes">
+      <EntityTypeMapping TypeName="SJSDDBModel.facdemo">
+        <MappingFragment StoreEntitySet="facdemo">
+          <ScalarProperty Name="funiq" ColumnName="funiq" />
+          <ScalarProperty Name="facuniq" ColumnName="facuniq" />
+          <ScalarProperty Name="ident" ColumnName="ident" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="firstname" ColumnName="firstname" />
+          <ScalarProperty Name="lastname" ColumnName="lastname" />
+          <ScalarProperty Name="birthdate" ColumnName="birthdate" />
+          <ScalarProperty Name="hiredate" ColumnName="hiredate" />
+          <ScalarProperty Name="ssn" ColumnName="ssn" />
+          <ScalarProperty Name="genderc" ColumnName="genderc" />
+          <ScalarProperty Name="ethnicc" ColumnName="ethnicc" />
+          <ScalarProperty Name="citizenc" ColumnName="citizenc" />
+          <ScalarProperty Name="countryc" ColumnName="countryc" />
+          <ScalarProperty Name="maritalc" ColumnName="maritalc" />
+          <ScalarProperty Name="passwd" ColumnName="passwd" />
+          <ScalarProperty Name="homeaddr1" ColumnName="homeaddr1" />
+          <ScalarProperty Name="homeaddr2" ColumnName="homeaddr2" />
+          <ScalarProperty Name="homecity" ColumnName="homecity" />
+          <ScalarProperty Name="homestate" ColumnName="homestate" />
+          <ScalarProperty Name="homezip" ColumnName="homezip" />
+          <ScalarProperty Name="mailaddr1" ColumnName="mailaddr1" />
+          <ScalarProperty Name="mailaddr2" ColumnName="mailaddr2" />
+          <ScalarProperty Name="mailcity" ColumnName="mailcity" />
+          <ScalarProperty Name="mailstate" ColumnName="mailstate" />
+          <ScalarProperty Name="mailzip" ColumnName="mailzip" />
+          <ScalarProperty Name="unlistaddr" ColumnName="unlistaddr" />
+          <ScalarProperty Name="emailaddr" ColumnName="emailaddr" />
+          <ScalarProperty Name="url" ColumnName="url" />
+          <ScalarProperty Name="edulvlc" ColumnName="edulvlc" />
+          <ScalarProperty Name="addhours" ColumnName="addhours" />
+          <ScalarProperty Name="barunitc" ColumnName="barunitc" />
+          <ScalarProperty Name="sndate" ColumnName="sndate" />
+          <ScalarProperty Name="autodate" ColumnName="autodate" />
+          <ScalarProperty Name="sysadmin" ColumnName="sysadmin" />
+          <ScalarProperty Name="SensitiveData" ColumnName="SensitiveData" />
+          <ScalarProperty Name="facdemo1" ColumnName="facdemo1" />
+          <ScalarProperty Name="facdemo2" ColumnName="facdemo2" />
+          <ScalarProperty Name="facdemo3" ColumnName="facdemo3" />
+          <ScalarProperty Name="facdemo4" ColumnName="facdemo4" />
+          <ScalarProperty Name="facdemo5" ColumnName="facdemo5" />
+          <ScalarProperty Name="facdemo6" ColumnName="facdemo6" />
+          <ScalarProperty Name="facnotes" ColumnName="facnotes" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="facstats">
+      <EntityTypeMapping TypeName="SJSDDBModel.facstat">
+        <MappingFragment StoreEntitySet="facstat">
+          <ScalarProperty Name="facuniq" ColumnName="facuniq" />
+          <ScalarProperty Name="ident" ColumnName="ident" />
+          <ScalarProperty Name="funiq" ColumnName="funiq" />
+          <ScalarProperty Name="edate" ColumnName="edate" />
+          <ScalarProperty Name="xdate" ColumnName="xdate" />
+          <ScalarProperty Name="evaldate" ColumnName="evaldate" />
+          <ScalarProperty Name="fte" ColumnName="fte" />
+          <ScalarProperty Name="trkuniq" ColumnName="trkuniq" />
+          <ScalarProperty Name="facstatc" ColumnName="facstatc" />
+          <ScalarProperty Name="dbadmin" ColumnName="dbadmin" />
+          <ScalarProperty Name="siteadmin" ColumnName="siteadmin" />
+          <ScalarProperty Name="counsel" ColumnName="counsel" />
+          <ScalarProperty Name="teacher" ColumnName="teacher" />
+          <ScalarProperty Name="certif" ColumnName="certif" />
+          <ScalarProperty Name="jobc" ColumnName="jobc" />
+          <ScalarProperty Name="sprvisec" ColumnName="sprvisec" />
+          <ScalarProperty Name="chgby" ColumnName="chgby" />
+          <ScalarProperty Name="chgdt" ColumnName="chgdt" />
+          <ScalarProperty Name="snreserve1" ColumnName="snreserve1" />
+          <ScalarProperty Name="snreserve2" ColumnName="snreserve2" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="schools">
+      <EntityTypeMapping TypeName="SJSDDBModel.school">
+        <MappingFragment StoreEntitySet="school">
+          <ScalarProperty Name="UrlToken" ColumnName="UrlToken" />
+          <ScalarProperty Name="ShortName" ColumnName="ShortName" />
+          <ScalarProperty Name="schuniq" ColumnName="schuniq" />
+          <ScalarProperty Name="schoolc" ColumnName="schoolc" />
+          <ScalarProperty Name="schname" ColumnName="schname" />
+          <ScalarProperty Name="addr" ColumnName="addr" />
+          <ScalarProperty Name="city" ColumnName="city" />
+          <ScalarProperty Name="state" ColumnName="state" />
+          <ScalarProperty Name="zip" ColumnName="zip" />
+          <ScalarProperty Name="schdistc" ColumnName="schdistc" />
+          <ScalarProperty Name="building" ColumnName="building" />
+          <ScalarProperty Name="phnnumber" ColumnName="phnnumber" />
+          <ScalarProperty Name="egraden" ColumnName="egraden" />
+          <ScalarProperty Name="xgraden" ColumnName="xgraden" />
+          <ScalarProperty Name="pgraden" ColumnName="pgraden" />
+          <ScalarProperty Name="schtypec" ColumnName="schtypec" />
+          <ScalarProperty Name="chksum" ColumnName="chksum" />
+          <ScalarProperty Name="modkey" ColumnName="modkey" />
+          <ScalarProperty Name="isdo" ColumnName="isdo" />
+          <ScalarProperty Name="schyear" ColumnName="schyear" />
+          <ScalarProperty Name="seschoolc" ColumnName="seschoolc" />
+          <ScalarProperty Name="snsrvuniq" ColumnName="snsrvuniq" />
+          <ScalarProperty Name="principal" ColumnName="principal" />
+          <ScalarProperty Name="monattend" ColumnName="monattend" />
+          <ScalarProperty Name="url" ColumnName="url" />
+          <ScalarProperty Name="emailaddr" ColumnName="emailaddr" />
+          <ScalarProperty Name="maintrackc" ColumnName="maintrackc" />
+          <ScalarProperty Name="nyinit" ColumnName="nyinit" />
+          <ScalarProperty Name="rnyrend" ColumnName="rnyrend" />
+          <ScalarProperty Name="RetainLockers" ColumnName="RetainLockers" />
+          <ScalarProperty Name="RetainAdvisors" ColumnName="RetainAdvisors" />
+          <ScalarProperty Name="ExcludeFromClearinghouse" ColumnName="ExcludeFromClearinghouse" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="studemoes">
+      <EntityTypeMapping TypeName="SJSDDBModel.studemo">
+        <MappingFragment StoreEntitySet="studemo">
+          <ScalarProperty Name="OverrideGraduationYear" ColumnName="OverrideGraduationYear" />
+          <ScalarProperty Name="IsConditionalAdmission" ColumnName="IsConditionalAdmission" />
+          <ScalarProperty Name="SpecifyPreferredNames" ColumnName="SpecifyPreferredNames" />
+          <ScalarProperty Name="UtahSchoolSystemVerified" ColumnName="UtahSchoolSystemVerified" />
+          <ScalarProperty Name="VisionScreeningVerified" ColumnName="VisionScreeningVerified" />
+          <ScalarProperty Name="ShotRecordsVerified" ColumnName="ShotRecordsVerified" />
+          <ScalarProperty Name="BirthCertificateVerified" ColumnName="BirthCertificateVerified" />
+          <ScalarProperty Name="LegalNameLastNameFirst" ColumnName="LegalNameLastNameFirst" />
+          <ScalarProperty Name="LegalName" ColumnName="LegalName" />
+          <ScalarProperty Name="LegalLastName" ColumnName="LegalLastName" />
+          <ScalarProperty Name="LegalMiddleName" ColumnName="LegalMiddleName" />
+          <ScalarProperty Name="LegalFirstName" ColumnName="LegalFirstName" />
+          <ScalarProperty Name="CensusNumber" ColumnName="CensusNumber" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="PreferredLastName" ColumnName="PreferredLastName" />
+          <ScalarProperty Name="PreferredMiddleName" ColumnName="PreferredMiddleName" />
+          <ScalarProperty Name="PreferredFirstName" ColumnName="PreferredFirstName" />
+          <ScalarProperty Name="suniq" ColumnName="suniq" />
+          <ScalarProperty Name="ident" ColumnName="ident" />
+          <ScalarProperty Name="stuuniq" ColumnName="stuuniq" />
+          <ScalarProperty Name="namesfx" ColumnName="namesfx" />
+          <ScalarProperty Name="nickname" ColumnName="nickname" />
+          <ScalarProperty Name="genderc" ColumnName="genderc" />
+          <ScalarProperty Name="ethnicc" ColumnName="ethnicc" />
+          <ScalarProperty Name="birthdate" ColumnName="birthdate" />
+          <ScalarProperty Name="birthplace" ColumnName="birthplace" />
+          <ScalarProperty Name="regdate" ColumnName="regdate" />
+          <ScalarProperty Name="ssn" ColumnName="ssn" />
+          <ScalarProperty Name="gradyear" ColumnName="gradyear" />
+          <ScalarProperty Name="homelangc" ColumnName="homelangc" />
+          <ScalarProperty Name="primlangc" ColumnName="primlangc" />
+          <ScalarProperty Name="homeaddr1" ColumnName="homeaddr1" />
+          <ScalarProperty Name="homeaddr2" ColumnName="homeaddr2" />
+          <ScalarProperty Name="homecity" ColumnName="homecity" />
+          <ScalarProperty Name="homestate" ColumnName="homestate" />
+          <ScalarProperty Name="homezip" ColumnName="homezip" />
+          <ScalarProperty Name="mailaddr1" ColumnName="mailaddr1" />
+          <ScalarProperty Name="mailaddr2" ColumnName="mailaddr2" />
+          <ScalarProperty Name="mailcity" ColumnName="mailcity" />
+          <ScalarProperty Name="mailstate" ColumnName="mailstate" />
+          <ScalarProperty Name="mailzip" ColumnName="mailzip" />
+          <ScalarProperty Name="emailaddr" ColumnName="emailaddr" />
+          <ScalarProperty Name="url" ColumnName="url" />
+          <ScalarProperty Name="phnnumber" ColumnName="phnnumber" />
+          <ScalarProperty Name="phntypec" ColumnName="phntypec" />
+          <ScalarProperty Name="phnunlist" ColumnName="phnunlist" />
+          <ScalarProperty Name="phnmsg" ColumnName="phnmsg" />
+          <ScalarProperty Name="bverbasc" ColumnName="bverbasc" />
+          <ScalarProperty Name="bverdocnum" ColumnName="bverdocnum" />
+          <ScalarProperty Name="citizenc" ColumnName="citizenc" />
+          <ScalarProperty Name="countryc" ColumnName="countryc" />
+          <ScalarProperty Name="dUsEntry" ColumnName="dUsEntry" />
+          <ScalarProperty Name="geocode" ColumnName="geocode" />
+          <ScalarProperty Name="resschoolc" ColumnName="resschoolc" />
+          <ScalarProperty Name="resdistc" ColumnName="resdistc" />
+          <ScalarProperty Name="chcschoolc" ColumnName="chcschoolc" />
+          <ScalarProperty Name="gradreqc" ColumnName="gradreqc" />
+          <ScalarProperty Name="careeruniq" ColumnName="careeruniq" />
+          <ScalarProperty Name="hlduniq" ColumnName="hlduniq" />
+          <ScalarProperty Name="buspuniq" ColumnName="buspuniq" />
+          <ScalarProperty Name="busduniq" ColumnName="busduniq" />
+          <ScalarProperty Name="maritalc" ColumnName="maritalc" />
+          <ScalarProperty Name="migrantnum" ColumnName="migrantnum" />
+          <ScalarProperty Name="legalbind" ColumnName="legalbind" />
+          <ScalarProperty Name="passwd" ColumnName="passwd" />
+          <ScalarProperty Name="retainflag" ColumnName="retainflag" />
+          <ScalarProperty Name="norank" ColumnName="norank" />
+          <ScalarProperty Name="CurrentStudentRankID" ColumnName="CurrentStudentRankID" />
+          <ScalarProperty Name="inforelc" ColumnName="inforelc" />
+          <ScalarProperty Name="counsfuniq" ColumnName="counsfuniq" />
+          <ScalarProperty Name="memberc" ColumnName="memberc" />
+          <ScalarProperty Name="chgby" ColumnName="chgby" />
+          <ScalarProperty Name="chgdt" ColumnName="chgdt" />
+          <ScalarProperty Name="stunotes" ColumnName="stunotes" />
+          <ScalarProperty Name="graddate" ColumnName="graddate" />
+          <ScalarProperty Name="compstatc" ColumnName="compstatc" />
+          <ScalarProperty Name="outofstate" ColumnName="outofstate" />
+          <ScalarProperty Name="SSID" ColumnName="SSID" />
+          <ScalarProperty Name="SSIDChangeFlag" ColumnName="SSIDChangeFlag" />
+          <ScalarProperty Name="LastVerifiedOn" ColumnName="LastVerifiedOn" />
+          <ScalarProperty Name="RaceObserverIdentified" ColumnName="RaceObserverIdentified" />
+          <ScalarProperty Name="CommunicationInfoChangedOn" ColumnName="CommunicationInfoChangedOn" />
+          <ScalarProperty Name="USEnrolledDate" ColumnName="USEnrolledDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="stuscheds">
+      <EntityTypeMapping TypeName="SJSDDBModel.stusched">
+        <MappingFragment StoreEntitySet="stusched">
+          <ScalarProperty Name="scduniq" ColumnName="scduniq" />
+          <ScalarProperty Name="suniq" ColumnName="suniq" />
+          <ScalarProperty Name="edate" ColumnName="edate" />
+          <ScalarProperty Name="escdchgyc" ColumnName="escdchgyc" />
+          <ScalarProperty Name="xdate" ColumnName="xdate" />
+          <ScalarProperty Name="xscdchgyc" ColumnName="xscdchgyc" />
+          <ScalarProperty Name="scdstatc" ColumnName="scdstatc" />
+          <ScalarProperty Name="requniq" ColumnName="requniq" />
+          <ScalarProperty Name="meetuniq" ColumnName="meetuniq" />
+          <ScalarProperty Name="chgby" ColumnName="chgby" />
+          <ScalarProperty Name="chgdt" ColumnName="chgdt" />
+          <ScalarProperty Name="snreserve1" ColumnName="snreserve1" />
+          <ScalarProperty Name="snreserve2" ColumnName="snreserve2" />
+          <ScalarProperty Name="ista" ColumnName="ista" />
+          <ScalarProperty Name="elocked" ColumnName="elocked" />
+          <ScalarProperty Name="xlocked" ColumnName="xlocked" />
+          <ScalarProperty Name="notconcurrent" ColumnName="notconcurrent" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tracks">
+      <EntityTypeMapping TypeName="SJSDDBModel.track">
+        <MappingFragment StoreEntitySet="track">
+          <ScalarProperty Name="trkuniq" ColumnName="trkuniq" />
+          <ScalarProperty Name="trackc" ColumnName="trackc" />
+          <ScalarProperty Name="descript" ColumnName="descript" />
+          <ScalarProperty Name="schoolc" ColumnName="schoolc" />
+          <ScalarProperty Name="schyear" ColumnName="schyear" />
+          <ScalarProperty Name="ppd" ColumnName="ppd" />
+          <ScalarProperty Name="dpc" ColumnName="dpc" />
+          <ScalarProperty Name="tpy" ColumnName="tpy" />
+          <ScalarProperty Name="mpy" ColumnName="mpy" />
+          <ScalarProperty Name="perqtr" ColumnName="perqtr" />
+          <ScalarProperty Name="perhalf" ColumnName="perhalf" />
+          <ScalarProperty Name="perfull" ColumnName="perfull" />
+          <ScalarProperty Name="countabs" ColumnName="countabs" />
+          <ScalarProperty Name="posatt" ColumnName="posatt" />
+          <ScalarProperty Name="mpfte" ColumnName="mpfte" />
+          <ScalarProperty Name="usesat" ColumnName="usesat" />
+          <ScalarProperty Name="belluniq" ColumnName="belluniq" />
+          <ScalarProperty Name="skipdays" ColumnName="skipdays" />
+          <ScalarProperty Name="credyr" ColumnName="credyr" />
+          <ScalarProperty Name="sched" ColumnName="sched" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="trkcrs">
+      <EntityTypeMapping TypeName="SJSDDBModel.trkcr">
+        <MappingFragment StoreEntitySet="trkcrs">
+          <ScalarProperty Name="trkcrsuniq" ColumnName="trkcrsuniq" />
+          <ScalarProperty Name="trkuniq" ColumnName="trkuniq" />
+          <ScalarProperty Name="crsuniq" ColumnName="crsuniq" />
+          <ScalarProperty Name="numsect" ColumnName="numsect" />
+          <ScalarProperty Name="ppc" ColumnName="ppc" />
+          <ScalarProperty Name="eperiodn" ColumnName="eperiodn" />
+          <ScalarProperty Name="lperiodn" ColumnName="lperiodn" />
+          <ScalarProperty Name="termc" ColumnName="termc" />
+          <ScalarProperty Name="snreserve1" ColumnName="snreserve1" />
+          <ScalarProperty Name="snreserve2" ColumnName="snreserve2" />
+          <ScalarProperty Name="gradcr" ColumnName="gradcr" />
+          <ScalarProperty Name="sectsize" ColumnName="sectsize" />
+          <ScalarProperty Name="tasize" ColumnName="tasize" />
+          <ScalarProperty Name="marksetc" ColumnName="marksetc" />
+          <ScalarProperty Name="lograden" ColumnName="lograden" />
+          <ScalarProperty Name="higraden" ColumnName="higraden" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="mstmeets">
+      <EntityTypeMapping TypeName="SJSDDBModel.mstmeet">
+        <MappingFragment StoreEntitySet="mstmeet">
+          <ScalarProperty Name="snreserve2" ColumnName="snreserve2" />
+          <ScalarProperty Name="snreserve1" ColumnName="snreserve1" />
+          <ScalarProperty Name="scanattnd" ColumnName="scanattnd" />
+          <ScalarProperty Name="ishomeroom" ColumnName="ishomeroom" />
+          <ScalarProperty Name="countattnd" ColumnName="countattnd" />
+          <ScalarProperty Name="takeattnd" ColumnName="takeattnd" />
+          <ScalarProperty Name="classroom" ColumnName="classroom" />
+          <ScalarProperty Name="periodn" ColumnName="periodn" />
+          <ScalarProperty Name="cycldayn" ColumnName="cycldayn" />
+          <ScalarProperty Name="termc" ColumnName="termc" />
+          <ScalarProperty Name="mstuniq" ColumnName="mstuniq" />
+          <ScalarProperty Name="meetuniq" ColumnName="meetuniq" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="mstscheds">
+      <EntityTypeMapping TypeName="SJSDDBModel.mstsched">
+        <MappingFragment StoreEntitySet="mstsched">
+          <ScalarProperty Name="MarksPerClass" ColumnName="MarksPerClass" />
+          <ScalarProperty Name="iselementary" ColumnName="iselementary" />
+          <ScalarProperty Name="collegecr" ColumnName="collegecr" />
+          <ScalarProperty Name="instructset" ColumnName="instructset" />
+          <ScalarProperty Name="campus" ColumnName="campus" />
+          <ScalarProperty Name="creditfrom" ColumnName="creditfrom" />
+          <ScalarProperty Name="whereschool" ColumnName="whereschool" />
+          <ScalarProperty Name="wheredist" ColumnName="wheredist" />
+          <ScalarProperty Name="mststatc" ColumnName="mststatc" />
+          <ScalarProperty Name="markdefc" ColumnName="markdefc" />
+          <ScalarProperty Name="snreserve2" ColumnName="snreserve2" />
+          <ScalarProperty Name="snreserve1" ColumnName="snreserve1" />
+          <ScalarProperty Name="scanprgrpt" ColumnName="scanprgrpt" />
+          <ScalarProperty Name="scanrptcrd" ColumnName="scanrptcrd" />
+          <ScalarProperty Name="scangrdbk" ColumnName="scangrdbk" />
+          <ScalarProperty Name="teamuniq" ColumnName="teamuniq" />
+          <ScalarProperty Name="varcr" ColumnName="varcr" />
+          <ScalarProperty Name="asgngrades" ColumnName="asgngrades" />
+          <ScalarProperty Name="posttohist" ColumnName="posttohist" />
+          <ScalarProperty Name="flag2" ColumnName="flag2" />
+          <ScalarProperty Name="flag1" ColumnName="flag1" />
+          <ScalarProperty Name="conflictok" ColumnName="conflictok" />
+          <ScalarProperty Name="isschedule" ColumnName="isschedule" />
+          <ScalarProperty Name="funiq" ColumnName="funiq" />
+          <ScalarProperty Name="tasize" ColumnName="tasize" />
+          <ScalarProperty Name="sectsize" ColumnName="sectsize" />
+          <ScalarProperty Name="sectionn" ColumnName="sectionn" />
+          <ScalarProperty Name="trkcrsuniq" ColumnName="trkcrsuniq" />
+          <ScalarProperty Name="mstuniq" ColumnName="mstuniq" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5b99839597e24a989581f01f3a39284f" Name="Diagram1" ZoomLevel="100">
+        <EntityTypeShape EntityType="SJSDDBModel.course" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SJSDDBModel.facdemo" Width="1.5" PointX="5.25" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SJSDDBModel.facstat" Width="1.5" PointX="3" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SJSDDBModel.school" Width="1.5" PointX="0.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SJSDDBModel.studemo" Width="1.5" PointX="8.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SJSDDBModel.stusched" Width="1.5" PointX="12.5" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SJSDDBModel.track" Width="1.5" PointX="0.75" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SJSDDBModel.trkcr" Width="1.5" PointX="6" PointY="8.75" IsExpanded="true" />
+        <AssociationConnector Association="SJSDDBModel.FK_trkcrs_course" ManuallyRouted="false" />
+        <AssociationConnector Association="SJSDDBModel.facdemo_facstat_FK" ManuallyRouted="false" />
+        <AssociationConnector Association="SJSDDBModel.FK_facstat_facdemo" ManuallyRouted="false" />
+        <AssociationConnector Association="SJSDDBModel.FK_facstat_track" ManuallyRouted="false" />
+        <AssociationConnector Association="SJSDDBModel.FK_stusched_studemo" ManuallyRouted="false" />
+        <AssociationConnector Association="SJSDDBModel.FK_trkcrs_track" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="SJSDDBModel.mstmeet" Width="1.5" PointX="12.875" PointY="13" />
+        <EntityTypeShape EntityType="SJSDDBModel.mstsched" Width="1.5" PointX="10.875" PointY="14.5" />
+        <AssociationConnector Association="SJSDDBModel.FK_mstsched_facdemo" />
+        <AssociationConnector Association="SJSDDBModel.FK_mstmeet_mstsched" />
+        <AssociationConnector Association="SJSDDBModel.FK_stusched_mstmeet" />
+        <AssociationConnector Association="SJSDDBModel.FK_mstsched_trkcrs" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

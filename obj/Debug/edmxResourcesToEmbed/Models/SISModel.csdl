@@ -1,0 +1,547 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SJSDDBModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="SJSDDBEntities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="courses" EntityType="SJSDDBModel.course" />
+    <EntitySet Name="facdemoes" EntityType="SJSDDBModel.facdemo" />
+    <EntitySet Name="facstats" EntityType="SJSDDBModel.facstat" />
+    <EntitySet Name="schools" EntityType="SJSDDBModel.school" />
+    <EntitySet Name="studemoes" EntityType="SJSDDBModel.studemo" />
+    <EntitySet Name="stuscheds" EntityType="SJSDDBModel.stusched" />
+    <EntitySet Name="tracks" EntityType="SJSDDBModel.track" />
+    <EntitySet Name="trkcrs" EntityType="SJSDDBModel.trkcr" />
+    <AssociationSet Name="FK_trkcrs_course" Association="SJSDDBModel.FK_trkcrs_course">
+      <End Role="course" EntitySet="courses" />
+      <End Role="trkcrs" EntitySet="trkcrs" />
+    </AssociationSet>
+    <AssociationSet Name="facdemo_facstat_FK" Association="SJSDDBModel.facdemo_facstat_FK">
+      <End Role="facstat" EntitySet="facstats" />
+      <End Role="facdemo" EntitySet="facdemoes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_facstat_facdemo" Association="SJSDDBModel.FK_facstat_facdemo">
+      <End Role="facdemo" EntitySet="facdemoes" />
+      <End Role="facstat" EntitySet="facstats" />
+    </AssociationSet>
+    <AssociationSet Name="FK_facstat_track" Association="SJSDDBModel.FK_facstat_track">
+      <End Role="track" EntitySet="tracks" />
+      <End Role="facstat" EntitySet="facstats" />
+    </AssociationSet>
+    <AssociationSet Name="FK_stusched_studemo" Association="SJSDDBModel.FK_stusched_studemo">
+      <End Role="studemo" EntitySet="studemoes" />
+      <End Role="stusched" EntitySet="stuscheds" />
+    </AssociationSet>
+    <AssociationSet Name="FK_trkcrs_track" Association="SJSDDBModel.FK_trkcrs_track">
+      <End Role="track" EntitySet="tracks" />
+      <End Role="trkcrs" EntitySet="trkcrs" />
+    </AssociationSet>
+    <EntitySet Name="mstmeets" EntityType="SJSDDBModel.mstmeet" />
+    <EntitySet Name="mstscheds" EntityType="SJSDDBModel.mstsched" />
+    <AssociationSet Name="FK_mstsched_facdemo" Association="SJSDDBModel.FK_mstsched_facdemo">
+      <End Role="facdemo" EntitySet="facdemoes" />
+      <End Role="mstsched" EntitySet="mstscheds" />
+    </AssociationSet>
+    <AssociationSet Name="FK_mstmeet_mstsched" Association="SJSDDBModel.FK_mstmeet_mstsched">
+      <End Role="mstsched" EntitySet="mstscheds" />
+      <End Role="mstmeet" EntitySet="mstmeets" />
+    </AssociationSet>
+    <AssociationSet Name="FK_stusched_mstmeet" Association="SJSDDBModel.FK_stusched_mstmeet">
+      <End Role="mstmeet" EntitySet="mstmeets" />
+      <End Role="stusched" EntitySet="stuscheds" />
+    </AssociationSet>
+    <AssociationSet Name="FK_mstsched_trkcrs" Association="SJSDDBModel.FK_mstsched_trkcrs">
+      <End Role="trkcr" EntitySet="trkcrs" />
+      <End Role="mstsched" EntitySet="mstscheds" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="course">
+    <Key>
+      <PropertyRef Name="crsuniq" />
+    </Key>
+    <Property Name="crsuniq" Type="Int32" Nullable="false" />
+    <Property Name="coursec" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="descript" Type="String" Nullable="false" MaxLength="32" Unicode="false" FixedLength="false" />
+    <Property Name="crscats" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="deptc" Type="String" MaxLength="4" Unicode="false" FixedLength="false" />
+    <Property Name="sectsize" Type="Decimal" Precision="3" Scale="0" />
+    <Property Name="tasize" Type="Decimal" Precision="2" Scale="0" />
+    <Property Name="crsstatc" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="trmdur" Type="Decimal" Precision="2" Scale="0" />
+    <Property Name="perdur" Type="Decimal" Precision="2" Scale="0" />
+    <Property Name="lograden" Type="Decimal" Precision="2" Scale="0" />
+    <Property Name="higraden" Type="Decimal" Precision="2" Scale="0" />
+    <Property Name="altc" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="genderenrl" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="isschedule" Type="Decimal" Precision="1" Scale="0" />
+    <Property Name="takeattnd" Type="Decimal" Precision="1" Scale="0" />
+    <Property Name="countattnd" Type="Decimal" Precision="1" Scale="0" />
+    <Property Name="conflictok" Type="Decimal" Precision="1" Scale="0" />
+    <Property Name="flag1" Type="Decimal" Precision="1" Scale="0" />
+    <Property Name="flag2" Type="Decimal" Precision="1" Scale="0" />
+    <Property Name="asgngrades" Type="Decimal" Precision="1" Scale="0" />
+    <Property Name="posttohist" Type="Decimal" Precision="1" Scale="0" />
+    <Property Name="varcr" Type="Decimal" Precision="1" Scale="0" />
+    <Property Name="crsnotes" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="snreserve1" Type="Decimal" Precision="1" Scale="0" />
+    <Property Name="snreserve2" Type="Decimal" Precision="1" Scale="0" />
+    <Property Name="CoreID" Type="Int32" />
+    <NavigationProperty Name="trkcrs" Relationship="SJSDDBModel.FK_trkcrs_course" FromRole="course" ToRole="trkcrs" />
+  </EntityType>
+  <EntityType Name="facdemo">
+    <Key>
+      <PropertyRef Name="funiq" />
+    </Key>
+    <Property Name="funiq" Type="Int32" Nullable="false" />
+    <Property Name="facuniq" Type="Int32" />
+    <Property Name="ident" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="title" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+    <Property Name="firstname" Type="String" MaxLength="16" Unicode="false" FixedLength="false" />
+    <Property Name="lastname" Type="String" Nullable="false" MaxLength="16" Unicode="false" FixedLength="false" />
+    <Property Name="birthdate" Type="DateTime" Precision="0" />
+    <Property Name="hiredate" Type="DateTime" Precision="0" />
+    <Property Name="ssn" Type="String" MaxLength="9" Unicode="false" FixedLength="true" />
+    <Property Name="genderc" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="ethnicc" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="citizenc" Type="String" MaxLength="2" Unicode="false" FixedLength="false" />
+    <Property Name="countryc" Type="String" MaxLength="2" Unicode="false" FixedLength="false" />
+    <Property Name="maritalc" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="passwd" Type="String" MaxLength="11" Unicode="false" FixedLength="false" />
+    <Property Name="homeaddr1" Type="String" MaxLength="32" Unicode="false" FixedLength="false" />
+    <Property Name="homeaddr2" Type="String" MaxLength="32" Unicode="false" FixedLength="false" />
+    <Property Name="homecity" Type="String" MaxLength="24" Unicode="false" FixedLength="false" />
+    <Property Name="homestate" Type="String" MaxLength="4" Unicode="false" FixedLength="false" />
+    <Property Name="homezip" Type="String" MaxLength="9" Unicode="false" FixedLength="true" />
+    <Property Name="mailaddr1" Type="String" MaxLength="32" Unicode="false" FixedLength="false" />
+    <Property Name="mailaddr2" Type="String" MaxLength="32" Unicode="false" FixedLength="false" />
+    <Property Name="mailcity" Type="String" MaxLength="24" Unicode="false" FixedLength="false" />
+    <Property Name="mailstate" Type="String" MaxLength="4" Unicode="false" FixedLength="false" />
+    <Property Name="mailzip" Type="String" MaxLength="9" Unicode="false" FixedLength="true" />
+    <Property Name="unlistaddr" Type="Decimal" Precision="1" Scale="0" />
+    <Property Name="emailaddr" Type="String" MaxLength="128" Unicode="false" FixedLength="false" />
+    <Property Name="url" Type="String" MaxLength="128" Unicode="false" FixedLength="false" />
+    <Property Name="edulvlc" Type="String" MaxLength="2" Unicode="false" FixedLength="false" />
+    <Property Name="addhours" Type="Decimal" Precision="3" Scale="0" />
+    <Property Name="barunitc" Type="String" MaxLength="6" Unicode="false" FixedLength="false" />
+    <Property Name="sndate" Type="DateTime" Precision="0" />
+    <Property Name="autodate" Type="Decimal" Precision="1" Scale="0" />
+    <Property Name="sysadmin" Type="Decimal" Precision="1" Scale="0" />
+    <Property Name="SensitiveData" Type="Boolean" Nullable="false" />
+    <Property Name="facdemo1" Type="Decimal" Precision="1" Scale="0" />
+    <Property Name="facdemo2" Type="Decimal" Precision="1" Scale="0" />
+    <Property Name="facdemo3" Type="Decimal" Precision="1" Scale="0" />
+    <Property Name="facdemo4" Type="Decimal" Precision="1" Scale="0" />
+    <Property Name="facdemo5" Type="Decimal" Precision="1" Scale="0" />
+    <Property Name="facdemo6" Type="Decimal" Precision="1" Scale="0" />
+    <Property Name="facnotes" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="facstat" Relationship="SJSDDBModel.facdemo_facstat_FK" FromRole="facdemo" ToRole="facstat" />
+    <NavigationProperty Name="facstats" Relationship="SJSDDBModel.FK_facstat_facdemo" FromRole="facdemo" ToRole="facstat" />
+    <NavigationProperty Name="mstscheds" Relationship="SJSDDBModel.FK_mstsched_facdemo" FromRole="facdemo" ToRole="mstsched" />
+  </EntityType>
+  <EntityType Name="facstat">
+    <Key>
+      <PropertyRef Name="facuniq" />
+    </Key>
+    <Property Name="facuniq" Type="Int32" Nullable="false" />
+    <Property Name="ident" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="funiq" Type="Int32" Nullable="false" />
+    <Property Name="edate" Type="DateTime" Precision="0" />
+    <Property Name="xdate" Type="DateTime" Precision="0" />
+    <Property Name="evaldate" Type="DateTime" Precision="0" />
+    <Property Name="fte" Type="Decimal" Precision="3" Scale="2" />
+    <Property Name="trkuniq" Type="Int32" />
+    <Property Name="facstatc" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="dbadmin" Type="Decimal" Precision="1" Scale="0" />
+    <Property Name="siteadmin" Type="Decimal" Precision="1" Scale="0" />
+    <Property Name="counsel" Type="Decimal" Precision="1" Scale="0" />
+    <Property Name="teacher" Type="Decimal" Precision="1" Scale="0" />
+    <Property Name="certif" Type="Decimal" Precision="1" Scale="0" />
+    <Property Name="jobc" Type="String" MaxLength="6" Unicode="false" FixedLength="false" />
+    <Property Name="sprvisec" Type="String" MaxLength="4" Unicode="false" FixedLength="false" />
+    <Property Name="chgby" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+    <Property Name="chgdt" Type="DateTime" Precision="3" />
+    <Property Name="snreserve1" Type="Decimal" Precision="1" Scale="0" />
+    <Property Name="snreserve2" Type="Decimal" Precision="1" Scale="0" />
+    <NavigationProperty Name="facdemoes" Relationship="SJSDDBModel.facdemo_facstat_FK" FromRole="facstat" ToRole="facdemo" />
+    <NavigationProperty Name="facdemo" Relationship="SJSDDBModel.FK_facstat_facdemo" FromRole="facstat" ToRole="facdemo" />
+    <NavigationProperty Name="track" Relationship="SJSDDBModel.FK_facstat_track" FromRole="facstat" ToRole="track" />
+  </EntityType>
+  <EntityType Name="school">
+    <Key>
+      <PropertyRef Name="schuniq" />
+    </Key>
+    <Property Name="schuniq" Type="Int32" Nullable="false" />
+    <Property Name="schoolc" Type="String" Nullable="false" MaxLength="5" Unicode="false" FixedLength="false" />
+    <Property Name="schname" Type="String" Nullable="false" MaxLength="32" Unicode="false" FixedLength="false" />
+    <Property Name="addr" Type="String" MaxLength="32" Unicode="false" FixedLength="false" />
+    <Property Name="city" Type="String" MaxLength="24" Unicode="false" FixedLength="false" />
+    <Property Name="state" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
+    <Property Name="zip" Type="String" MaxLength="9" Unicode="false" FixedLength="true" />
+    <Property Name="schdistc" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="building" Type="String" MaxLength="12" Unicode="false" FixedLength="false" />
+    <Property Name="phnnumber" Type="String" MaxLength="10" Unicode="false" FixedLength="true" />
+    <Property Name="egraden" Type="Decimal" Precision="2" Scale="0" />
+    <Property Name="xgraden" Type="Decimal" Precision="2" Scale="0" />
+    <Property Name="pgraden" Type="Decimal" Precision="2" Scale="0" />
+    <Property Name="schtypec" Type="String" MaxLength="3" Unicode="false" FixedLength="false" />
+    <Property Name="chksum" Type="Decimal" Precision="10" Scale="0" />
+    <Property Name="modkey" Type="String" MaxLength="12" Unicode="false" FixedLength="false" />
+    <Property Name="isdo" Type="Decimal" Precision="1" Scale="0" />
+    <Property Name="schyear" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+    <Property Name="seschoolc" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="snsrvuniq" Type="Int32" />
+    <Property Name="principal" Type="String" MaxLength="32" Unicode="false" FixedLength="true" />
+    <Property Name="monattend" Type="Decimal" Precision="1" Scale="0" />
+    <Property Name="url" Type="String" MaxLength="128" Unicode="false" FixedLength="false" />
+    <Property Name="emailaddr" Type="String" MaxLength="128" Unicode="false" FixedLength="false" />
+    <Property Name="maintrackc" Type="String" MaxLength="3" Unicode="false" FixedLength="false" />
+    <Property Name="nyinit" Type="Decimal" Precision="1" Scale="0" />
+    <Property Name="rnyrend" Type="Decimal" Precision="1" Scale="0" />
+    <Property Name="RetainLockers" Type="Boolean" Nullable="false" />
+    <Property Name="RetainAdvisors" Type="Boolean" Nullable="false" />
+    <Property Name="ExcludeFromClearinghouse" Type="Boolean" Nullable="false" />
+    <Property Type="String" Name="ShortName" MaxLength="32" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="UrlToken" MaxLength="32" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Computed" />
+  </EntityType>
+  <EntityType Name="studemo">
+    <Key>
+      <PropertyRef Name="suniq" />
+    </Key>
+    <Property Name="suniq" Type="Int32" Nullable="false" />
+    <Property Name="ident" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="stuuniq" Type="Int32" />
+    <Property Name="namesfx" Type="String" MaxLength="4" Unicode="false" FixedLength="false" />
+    <Property Name="nickname" Type="String" MaxLength="16" Unicode="false" FixedLength="false" />
+    <Property Name="genderc" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="ethnicc" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="birthdate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="birthplace" Type="String" MaxLength="32" Unicode="false" FixedLength="false" />
+    <Property Name="regdate" Type="DateTime" Precision="0" />
+    <Property Name="ssn" Type="String" MaxLength="9" Unicode="false" FixedLength="true" />
+    <Property Name="gradyear" Type="Decimal" Precision="4" Scale="0" />
+    <Property Name="homelangc" Type="String" MaxLength="2" Unicode="false" FixedLength="false" />
+    <Property Name="primlangc" Type="String" MaxLength="2" Unicode="false" FixedLength="false" />
+    <Property Name="homeaddr1" Type="String" MaxLength="32" Unicode="false" FixedLength="false" />
+    <Property Name="homeaddr2" Type="String" MaxLength="32" Unicode="false" FixedLength="false" />
+    <Property Name="homecity" Type="String" MaxLength="24" Unicode="false" FixedLength="false" />
+    <Property Name="homestate" Type="String" MaxLength="4" Unicode="false" FixedLength="false" />
+    <Property Name="homezip" Type="String" MaxLength="9" Unicode="false" FixedLength="true" />
+    <Property Name="mailaddr1" Type="String" MaxLength="32" Unicode="false" FixedLength="false" />
+    <Property Name="mailaddr2" Type="String" MaxLength="32" Unicode="false" FixedLength="false" />
+    <Property Name="mailcity" Type="String" MaxLength="24" Unicode="false" FixedLength="false" />
+    <Property Name="mailstate" Type="String" MaxLength="4" Unicode="false" FixedLength="false" />
+    <Property Name="mailzip" Type="String" MaxLength="9" Unicode="false" FixedLength="true" />
+    <Property Name="emailaddr" Type="String" MaxLength="128" Unicode="false" FixedLength="false" />
+    <Property Name="url" Type="String" MaxLength="64" Unicode="false" FixedLength="false" />
+    <Property Name="phnnumber" Type="String" MaxLength="10" Unicode="false" FixedLength="true" />
+    <Property Name="phntypec" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="phnunlist" Type="Decimal" Precision="1" Scale="0" />
+    <Property Name="phnmsg" Type="Decimal" Precision="1" Scale="0" />
+    <Property Name="bverbasc" Type="String" MaxLength="2" Unicode="false" FixedLength="false" />
+    <Property Name="bverdocnum" Type="String" MaxLength="32" Unicode="false" FixedLength="false" />
+    <Property Name="citizenc" Type="String" MaxLength="2" Unicode="false" FixedLength="false" />
+    <Property Name="countryc" Type="String" MaxLength="2" Unicode="false" FixedLength="false" />
+    <Property Name="dUsEntry" Type="DateTime" Precision="0" />
+    <Property Name="geocode" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="resschoolc" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+    <Property Name="resdistc" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="chcschoolc" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+    <Property Name="gradreqc" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="careeruniq" Type="Int32" />
+    <Property Name="hlduniq" Type="Int32" />
+    <Property Name="buspuniq" Type="Int32" />
+    <Property Name="busduniq" Type="Int32" />
+    <Property Name="maritalc" Type="String" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="migrantnum" Type="String" MaxLength="16" Unicode="false" FixedLength="false" />
+    <Property Name="legalbind" Type="String" MaxLength="254" Unicode="false" FixedLength="false" />
+    <Property Name="passwd" Type="String" MaxLength="11" Unicode="false" FixedLength="false" />
+    <Property Name="retainflag" Type="Decimal" Precision="1" Scale="0" />
+    <Property Name="norank" Type="Decimal" Precision="1" Scale="0" />
+    <Property Name="CurrentStudentRankID" Type="Int32" />
+    <Property Name="inforelc" Type="String" Nullable="false" MaxLength="2" Unicode="false" FixedLength="false" />
+    <Property Name="counsfuniq" Type="Int32" />
+    <Property Name="memberc" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="chgby" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+    <Property Name="chgdt" Type="DateTime" Precision="3" />
+    <Property Name="stunotes" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+    <Property Name="graddate" Type="DateTime" Precision="0" />
+    <Property Name="compstatc" Type="String" MaxLength="2" Unicode="false" FixedLength="false" />
+    <Property Name="outofstate" Type="Byte" Nullable="false" />
+    <Property Name="SSID" Type="Int32" />
+    <Property Name="SSIDChangeFlag" Type="Int32" Nullable="false" />
+    <Property Name="LastVerifiedOn" Type="DateTime" Precision="3" />
+    <Property Name="RaceObserverIdentified" Type="Boolean" Nullable="false" />
+    <Property Name="CommunicationInfoChangedOn" Type="DateTime" Precision="3" />
+    <Property Name="USEnrolledDate" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="stuscheds" Relationship="SJSDDBModel.FK_stusched_studemo" FromRole="studemo" ToRole="stusched" />
+    <Property Type="String" Name="PreferredFirstName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="PreferredMiddleName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="PreferredLastName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="FirstName" MaxLength="20" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="Computed" />
+    <Property Type="String" Name="MiddleName" MaxLength="20" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="Computed" />
+    <Property Type="String" Name="LastName" MaxLength="20" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="Computed" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="201" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="Computed" />
+    <Property Type="String" Name="FullName" Nullable="false" MaxLength="302" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="Computed" />
+    <Property Type="String" Name="CensusNumber" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="LegalFirstName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="LegalMiddleName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="LegalLastName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="LegalName" Nullable="false" MaxLength="302" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="Computed" />
+    <Property Type="String" Name="LegalNameLastNameFirst" Nullable="false" MaxLength="303" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="Computed" />
+    <Property Type="Boolean" Name="BirthCertificateVerified" Nullable="false" />
+    <Property Type="Boolean" Name="ShotRecordsVerified" Nullable="false" />
+    <Property Type="Boolean" Name="VisionScreeningVerified" Nullable="false" />
+    <Property Type="Boolean" Name="UtahSchoolSystemVerified" Nullable="false" />
+    <Property Type="Boolean" Name="SpecifyPreferredNames" Nullable="false" />
+    <Property Type="Boolean" Name="IsConditionalAdmission" Nullable="false" />
+    <Property Type="Boolean" Name="OverrideGraduationYear" Nullable="false" />
+  </EntityType>
+  <EntityType Name="stusched">
+    <Key>
+      <PropertyRef Name="scduniq" />
+    </Key>
+    <Property Name="scduniq" Type="Int32" Nullable="false" />
+    <Property Name="suniq" Type="Int32" Nullable="false" />
+    <Property Name="edate" Type="DateTime" Precision="0" />
+    <Property Name="escdchgyc" Type="String" MaxLength="2" Unicode="false" FixedLength="false" />
+    <Property Name="xdate" Type="DateTime" Precision="0" />
+    <Property Name="xscdchgyc" Type="String" MaxLength="2" Unicode="false" FixedLength="false" />
+    <Property Name="scdstatc" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="false" />
+    <Property Name="requniq" Type="Int32" />
+    <Property Name="meetuniq" Type="Int32" Nullable="false" />
+    <Property Name="chgby" Type="String" MaxLength="5" Unicode="false" FixedLength="false" />
+    <Property Name="chgdt" Type="DateTime" Precision="3" />
+    <Property Name="snreserve1" Type="Decimal" Precision="3" Scale="0" />
+    <Property Name="snreserve2" Type="Decimal" Precision="3" Scale="0" />
+    <Property Name="ista" Type="Decimal" Precision="1" Scale="0" />
+    <Property Name="elocked" Type="Decimal" Precision="1" Scale="0" />
+    <Property Name="xlocked" Type="Decimal" Precision="1" Scale="0" />
+    <Property Name="notconcurrent" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="studemo" Relationship="SJSDDBModel.FK_stusched_studemo" FromRole="stusched" ToRole="studemo" />
+    <NavigationProperty Name="mstmeet" Relationship="SJSDDBModel.FK_stusched_mstmeet" FromRole="stusched" ToRole="mstmeet" />
+  </EntityType>
+  <EntityType Name="track">
+    <Key>
+      <PropertyRef Name="trkuniq" />
+    </Key>
+    <Property Name="trkuniq" Type="Int32" Nullable="false" />
+    <Property Name="trackc" Type="String" Nullable="false" MaxLength="3" Unicode="false" FixedLength="false" />
+    <Property Name="descript" Type="String" Nullable="false" MaxLength="32" Unicode="false" FixedLength="false" />
+    <Property Name="schoolc" Type="String" Nullable="false" MaxLength="5" Unicode="false" FixedLength="false" />
+    <Property Name="schyear" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+    <Property Name="ppd" Type="Decimal" Nullable="false" Precision="2" Scale="0" />
+    <Property Name="dpc" Type="Decimal" Nullable="false" Precision="2" Scale="0" />
+    <Property Name="tpy" Type="Decimal" Nullable="false" Precision="2" Scale="0" />
+    <Property Name="mpy" Type="Decimal" Precision="2" Scale="0" />
+    <Property Name="perqtr" Type="Decimal" Precision="2" Scale="0" />
+    <Property Name="perhalf" Type="Decimal" Precision="2" Scale="0" />
+    <Property Name="perfull" Type="Decimal" Precision="2" Scale="0" />
+    <Property Name="countabs" Type="Decimal" Precision="1" Scale="0" />
+    <Property Name="posatt" Type="Decimal" Precision="1" Scale="0" />
+    <Property Name="mpfte" Type="Decimal" Precision="3" Scale="0" />
+    <Property Name="usesat" Type="Decimal" Precision="1" Scale="0" />
+    <Property Name="belluniq" Type="Int32" />
+    <Property Name="skipdays" Type="Decimal" Precision="1" Scale="0" />
+    <Property Name="credyr" Type="Decimal" Precision="6" Scale="4" />
+    <Property Name="sched" Type="Decimal" Precision="1" Scale="0" />
+    <NavigationProperty Name="facstats" Relationship="SJSDDBModel.FK_facstat_track" FromRole="track" ToRole="facstat" />
+    <NavigationProperty Name="trkcrs" Relationship="SJSDDBModel.FK_trkcrs_track" FromRole="track" ToRole="trkcrs" />
+  </EntityType>
+  <EntityType Name="trkcr">
+    <Key>
+      <PropertyRef Name="trkcrsuniq" />
+    </Key>
+    <Property Name="trkcrsuniq" Type="Int32" Nullable="false" />
+    <Property Name="trkuniq" Type="Int32" Nullable="false" />
+    <Property Name="crsuniq" Type="Int32" />
+    <Property Name="numsect" Type="Decimal" Precision="3" Scale="0" />
+    <Property Name="ppc" Type="Decimal" Precision="2" Scale="0" />
+    <Property Name="eperiodn" Type="Decimal" Precision="2" Scale="0" />
+    <Property Name="lperiodn" Type="Decimal" Precision="2" Scale="0" />
+    <Property Name="termc" Type="String" MaxLength="3" Unicode="false" FixedLength="false" />
+    <Property Name="snreserve1" Type="Decimal" Precision="1" Scale="0" />
+    <Property Name="snreserve2" Type="Decimal" Precision="1" Scale="0" />
+    <Property Name="gradcr" Type="Decimal" Precision="6" Scale="4" />
+    <Property Name="sectsize" Type="Decimal" Precision="3" Scale="0" />
+    <Property Name="tasize" Type="Decimal" Precision="2" Scale="0" />
+    <Property Name="marksetc" Type="String" MaxLength="3" Unicode="false" FixedLength="false" />
+    <Property Name="lograden" Type="Decimal" Precision="2" Scale="0" />
+    <Property Name="higraden" Type="Decimal" Precision="2" Scale="0" />
+    <NavigationProperty Name="course" Relationship="SJSDDBModel.FK_trkcrs_course" FromRole="trkcrs" ToRole="course" />
+    <NavigationProperty Name="track" Relationship="SJSDDBModel.FK_trkcrs_track" FromRole="trkcrs" ToRole="track" />
+    <NavigationProperty Name="mstscheds" Relationship="SJSDDBModel.FK_mstsched_trkcrs" FromRole="trkcr" ToRole="mstsched" />
+  </EntityType>
+  <Association Name="FK_trkcrs_course">
+    <End Role="course" Type="SJSDDBModel.course" Multiplicity="0..1" />
+    <End Role="trkcrs" Type="SJSDDBModel.trkcr" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="course">
+        <PropertyRef Name="crsuniq" />
+      </Principal>
+      <Dependent Role="trkcrs">
+        <PropertyRef Name="crsuniq" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="facdemo_facstat_FK">
+    <End Role="facstat" Type="SJSDDBModel.facstat" Multiplicity="0..1" />
+    <End Role="facdemo" Type="SJSDDBModel.facdemo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="facstat">
+        <PropertyRef Name="facuniq" />
+      </Principal>
+      <Dependent Role="facdemo">
+        <PropertyRef Name="facuniq" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_facstat_facdemo">
+    <End Role="facdemo" Type="SJSDDBModel.facdemo" Multiplicity="1" />
+    <End Role="facstat" Type="SJSDDBModel.facstat" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="facdemo">
+        <PropertyRef Name="funiq" />
+      </Principal>
+      <Dependent Role="facstat">
+        <PropertyRef Name="funiq" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_facstat_track">
+    <End Role="track" Type="SJSDDBModel.track" Multiplicity="0..1" />
+    <End Role="facstat" Type="SJSDDBModel.facstat" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="track">
+        <PropertyRef Name="trkuniq" />
+      </Principal>
+      <Dependent Role="facstat">
+        <PropertyRef Name="trkuniq" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_stusched_studemo">
+    <End Role="studemo" Type="SJSDDBModel.studemo" Multiplicity="1" />
+    <End Role="stusched" Type="SJSDDBModel.stusched" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="studemo">
+        <PropertyRef Name="suniq" />
+      </Principal>
+      <Dependent Role="stusched">
+        <PropertyRef Name="suniq" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_trkcrs_track">
+    <End Role="track" Type="SJSDDBModel.track" Multiplicity="1" />
+    <End Role="trkcrs" Type="SJSDDBModel.trkcr" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="track">
+        <PropertyRef Name="trkuniq" />
+      </Principal>
+      <Dependent Role="trkcrs">
+        <PropertyRef Name="trkuniq" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="mstmeet">
+    <Key>
+      <PropertyRef Name="meetuniq" />
+    </Key>
+    <Property Type="Int32" Name="meetuniq" Nullable="false" />
+    <Property Type="Int32" Name="mstuniq" />
+    <Property Type="String" Name="termc" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="cycldayn" Precision="2" Scale="0" />
+    <Property Type="Decimal" Name="periodn" Precision="2" Scale="0" />
+    <Property Type="String" Name="classroom" MaxLength="7" FixedLength="false" Unicode="false" />
+    <Property Type="Decimal" Name="takeattnd" Precision="1" Scale="0" />
+    <Property Type="Decimal" Name="countattnd" Precision="1" Scale="0" />
+    <Property Type="Decimal" Name="ishomeroom" Precision="1" Scale="0" />
+    <Property Type="Decimal" Name="scanattnd" Precision="1" Scale="0" />
+    <Property Type="Decimal" Name="snreserve1" Precision="3" Scale="0" />
+    <Property Type="Decimal" Name="snreserve2" Precision="3" Scale="0" />
+    <NavigationProperty Name="mstsched" Relationship="SJSDDBModel.FK_mstmeet_mstsched" FromRole="mstmeet" ToRole="mstsched" />
+    <NavigationProperty Name="stuscheds" Relationship="SJSDDBModel.FK_stusched_mstmeet" FromRole="mstmeet" ToRole="stusched" />
+  </EntityType>
+  <EntityType Name="mstsched">
+    <Key>
+      <PropertyRef Name="mstuniq" />
+    </Key>
+    <Property Type="Int32" Name="mstuniq" Nullable="false" />
+    <Property Type="Int32" Name="trkcrsuniq" Nullable="false" />
+    <Property Type="Decimal" Name="sectionn" Nullable="false" Precision="3" Scale="0" />
+    <Property Type="Decimal" Name="sectsize" Nullable="false" Precision="3" Scale="0" />
+    <Property Type="Decimal" Name="tasize" Precision="2" Scale="0" />
+    <Property Type="Int32" Name="funiq" />
+    <Property Type="Decimal" Name="isschedule" Precision="1" Scale="0" />
+    <Property Type="Decimal" Name="conflictok" Precision="1" Scale="0" />
+    <Property Type="Decimal" Name="flag1" Precision="1" Scale="0" />
+    <Property Type="Decimal" Name="flag2" Precision="1" Scale="0" />
+    <Property Type="Decimal" Name="posttohist" Precision="1" Scale="0" />
+    <Property Type="Decimal" Name="asgngrades" Precision="1" Scale="0" />
+    <Property Type="Decimal" Name="varcr" Precision="1" Scale="0" />
+    <Property Type="Int32" Name="teamuniq" />
+    <Property Type="Decimal" Name="scangrdbk" Precision="1" Scale="0" />
+    <Property Type="Decimal" Name="scanrptcrd" Precision="1" Scale="0" />
+    <Property Type="Decimal" Name="scanprgrpt" Precision="1" Scale="0" />
+    <Property Type="Decimal" Name="snreserve1" Precision="3" Scale="0" />
+    <Property Type="Decimal" Name="snreserve2" Precision="3" Scale="0" />
+    <Property Type="String" Name="markdefc" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="mststatc" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="wheredist" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="whereschool" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="creditfrom" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="campus" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="instructset" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="collegecr" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="iselementary" Nullable="false" />
+    <Property Type="Byte" Name="MarksPerClass" Nullable="false" />
+    <NavigationProperty Name="facdemo" Relationship="SJSDDBModel.FK_mstsched_facdemo" FromRole="mstsched" ToRole="facdemo" />
+    <NavigationProperty Name="mstmeets" Relationship="SJSDDBModel.FK_mstmeet_mstsched" FromRole="mstsched" ToRole="mstmeet" />
+    <NavigationProperty Name="trkcr" Relationship="SJSDDBModel.FK_mstsched_trkcrs" FromRole="mstsched" ToRole="trkcr" />
+  </EntityType>
+  <Association Name="FK_mstsched_facdemo">
+    <End Type="SJSDDBModel.facdemo" Role="facdemo" Multiplicity="0..1" />
+    <End Type="SJSDDBModel.mstsched" Role="mstsched" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="facdemo">
+        <PropertyRef Name="funiq" />
+      </Principal>
+      <Dependent Role="mstsched">
+        <PropertyRef Name="funiq" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_mstmeet_mstsched">
+    <End Type="SJSDDBModel.mstsched" Role="mstsched" Multiplicity="0..1" />
+    <End Type="SJSDDBModel.mstmeet" Role="mstmeet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="mstsched">
+        <PropertyRef Name="mstuniq" />
+      </Principal>
+      <Dependent Role="mstmeet">
+        <PropertyRef Name="mstuniq" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_stusched_mstmeet">
+    <End Type="SJSDDBModel.mstmeet" Role="mstmeet" Multiplicity="1" />
+    <End Type="SJSDDBModel.stusched" Role="stusched" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="mstmeet">
+        <PropertyRef Name="meetuniq" />
+      </Principal>
+      <Dependent Role="stusched">
+        <PropertyRef Name="meetuniq" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_mstsched_trkcrs">
+    <End Type="SJSDDBModel.trkcr" Role="trkcr" Multiplicity="1" />
+    <End Type="SJSDDBModel.mstsched" Role="mstsched" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="trkcr">
+        <PropertyRef Name="trkcrsuniq" />
+      </Principal>
+      <Dependent Role="mstsched">
+        <PropertyRef Name="trkcrsuniq" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

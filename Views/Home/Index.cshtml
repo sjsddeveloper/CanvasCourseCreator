@@ -1,0 +1,195 @@
+﻿@{
+    ViewBag.Title = "Triple C home";
+}
+
+<h3>To Create A Course We Need The Following Information:</h3>
+<ol class="round">
+    <li class="one">
+        <h5>Pick A School</h5>
+        @Html.DropDownList("school-list", new SelectList(ViewBag.Schools, "schuniq", "schname"), "Please Select", new { id = "school-list" })
+    </li>
+
+    <li class="two">
+        <h5>Choose A Course</h5>
+        <select id="course-list" disabled="disabled">
+            <option>Choose a school</option>
+        </select>
+        <p id="course-message" class="hidden display-inline"></p>
+    </li>
+
+    <li class="three">
+        <h5 id="course-action-header">Create Your Canvas Course</h5>
+        <div id="step-three" class="hidden">
+            <button id="create-course-btn" onclick="createCourse()">Create Course</button>
+        </div>
+    </li>
+    
+    <li class="four">
+        <h5>Choose Sections</h5>
+        <div id="section-container" class="hidden">
+            <table id="section-table">
+                <tr><th>Section Exists</th><th>Refresh Students</th><th>Period</th><th>Term Code</th><th></th></tr>
+            </table>
+        </div>
+    </li>
+</ol>
+
+@section Scripts {
+
+    <script type="text/javascript">
+        $("#school-list").change(function() {
+            restart();
+            //get the courses for the school
+            var schuniq = $("#school-list").val();
+            if (schuniq != null && schuniq.length > 0) {
+                var url = "/CanvasCourseCreator/Home/GetCoursesBySchoolCode";
+
+                $.post(url, { schuniq: schuniq }, function(data) {
+                    if (data.success == "true") {
+                        buildList("#course-list", data.courses);
+                    }
+                });
+            } else {
+                $("#course-list").html("<option>Choose a school</option>");
+            }
+        });
+
+        $("#course-list").live("change", function () {
+            clearCourse();
+            clearSections();
+            clearStepThree();
+            checkForCourse();
+        });
+
+        function buildList(id, listItems) {
+            var options = "<option>Please Select</option>";
+
+            for (i = 0; i < listItems.length; i++) {
+                var option = "<option value='" + listItems[i].value + "'>" + listItems[i].text + "</option>";
+                options += option;
+            }
+            $(id).html(options);
+            $(id).attr('disabled', false);
+        }
+
+        function checkForCourse() {
+            var courseData = $('#course-list').val();
+            if (courseData != null && courseData != "Choose a school" && courseData != "Please Select") {
+                var splitData = courseData.split(':');
+                var schuniq = $("#school-list").val();
+
+                var url = "/CanvasCourseCreator/Home/LookUpCourse";
+
+                $.post(url, { crsuniq: splitData[0], funiq: splitData[1], schuniq: schuniq }, function(data) {
+                    if (data.success == "true") {
+                        $("#course-action-header").text("Course Already Exists");
+                        $("#course-message").text("Course exists ... Retreiving course data!");
+                        $("#course-message").show();
+                        getSectionData(data.course.id);
+                    } else {
+                        $("#step-three").show();
+                    }
+                });
+            }
+        }
+
+        function getSectionData(courseId) {
+            var courseData = $('#course-list').val();
+            var splitData = courseData.split(':');
+
+            var url = "/CanvasCourseCreator/Home/LookUpSISPeriods";
+
+            $.post(url, { crsuniq: splitData[0], funiq: splitData[1] }, function(data) {
+                if (data.success == "true") {
+                    var periods = data.periods;
+                    for (var i = 0; i < periods.length; i++) {
+                        var row = "<tr class='removeable-row'><td><input type='checkbox' id='" + periods[i].mstuniq + "'";
+                        if (periods[i].section != null) {
+                            row += "checked='checked' disabled='true'";
+                        } else {
+                            row += "onclick='createSection(" + courseId + ", " + periods[i].mstuniq + ")'";
+                        }
+                        row += "/></td>";
+                        if (periods[i].section != null) {
+                            row += "<td><input type='button' onclick='updateStudentsInSection(" + periods[i].mstuniq + ")' value='Refresh' /></td>";
+                        } else {
+                            row += "<td></td>";
+                        }
+                        row += "<td>" + periods[i].period + "</td><td>" + periods[i].termc + "</td><td id='" + periods[i].mstuniq + "-message'></td></tr>";
+
+                        $("#section-table tr").last().after(row);
+                    }
+                    $("#section-container").show();
+                }
+            });
+        }
+
+        function createSection(courseId, mstuniq) {
+            $('#' + mstuniq).attr("disabled", true);
+
+            var url = "/CanvasCourseCreator/Home/CreateCourseSection";
+
+            $.post(url, { courseId: courseId, mstuniq: mstuniq }, function(data) {
+                if (data.success == "true") {
+                    updateStudentsInSection(mstuniq);
+                    $("#" + mstuniq + "-message").text("Section created! Adding students.");
+                }
+            });
+
+        }
+
+        function updateStudentsInSection(mstuniq) {
+            var url = "/CanvasCourseCreator/Home/UpdateStudentsInSection";
+
+            $.post(url, { mstuniq: mstuniq }, function(data) {
+                if (data.success == "true") {
+                    $("#" + mstuniq + "-message").html("<h6>Students Added!</h6> <table><tr><th>Students Added</th><th>Students Removed</th><th>Students Left Alone</th><th>Students with Errors</th><th>Total Enrollment</th></tr>" +
+                        "<tr><td>" + data.studentsAdded + "</td><td>" + data.studentsRemoved + "</td><td>" + data.studentsLeftAlone + "</td><td>" + data.studentsWithErrors + "</td><td>" + data.studentsCurrentlyEnrolled + "</td></tr>");
+                }
+            });
+        }
+
+        function createCourse() {
+            $('#create-course-btn').attr("disabled", true);
+            var courseData = $('#course-list').val();
+            var splitData = courseData.split(':');
+            var schuniq = $("#school-list").val();
+
+            var url = "/CanvasCourseCreator/Home/CreateCourse";
+
+            $.post(url, { crsuniq: splitData[0], funiq: splitData[1], schuniq: schuniq }, function(data) {
+                if (data.success == "true") {
+                    getSectionData(data.courseId);
+                }
+            });
+
+        }
+
+        function clearCourse() {
+            $("#course-message").hide();
+            $("#course-message").text("Loading");
+        }
+
+        function clearSections() {
+            $("#section-container").hide();
+            $(".removeable-row").remove();
+        }
+
+        function clearStepThree() {
+            $("#step-three").hide();
+            $('#create-course-btn').attr("disabled", false);
+            $("#course-action-header").text("Create Your Canvas Course");
+        }
+
+        function restart() {
+            clearCourse();
+            clearStepThree();
+            clearSections();
+            var option = "<option>Choose a school</option>";
+            $("#course-list").html(option);
+            $("#course-list").attr('disabled', true);
+
+
+        }
+    </script>
+}
