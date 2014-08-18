@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Data.Metadata.Edm;
 using System.Data.Objects;
 using System.Linq;
 using System.Web;
@@ -18,30 +19,10 @@ namespace CanvasCourseCreator.Controllers
     [Authorize(Roles = "gg_application_admin")]
     public class HomeController : Controller
     {
-        private SJSDDBEntities SISdb = new SJSDDBEntities();
-        //test api key
-        //private static string oAuthKey = "6~oeGLSBKUnWrIahWZU2xgTDUWz7HqY4gR7CtRaJYusoWATKkwYuGR8KW1mfP2Kbje";
-        //live api key
-        private static string oAuthKey = "6~4w8W22KEjlw89sbWR2XKIGgcbTflETTONenQsB245BpjTYxJQ5ovT30bDXQzAAea";
-        //test url
-        //private static string canvasURL = "https://sjsd.test.instructure.com/api/v1/";
-        //live url
-        private static string canvasURL = "https://sjsd.instructure.com/api/v1/";
-        private static Dictionary<string, int> accountIDs = new Dictionary<string, int>()
-                    { 
-                        { "708", 90289 },
-                        { "704", 90290 },
-                        { "710", 88207 },
-                        { "706", 90292 },
-                        { "712", 90293 },
-                        { "308", 102978 },
-                        { "104", 103474 },
-                        { "108", 103474 },
-                        { "140", 103474 },
-                        { "136", 103474 },
-                        { "124", 103474 },
-                        { "148", 103474 }
-                    };
+        private readonly SJSDDBEntities SISdb = new SJSDDBEntities();
+        private const string OAuthKey = Globals.API_KEY;
+        private const string CanvasUrl = Globals.CANVAS_URL;
+        private static readonly Dictionary<string, int> AccountIDs = Globals.accountIDs;
 
         public ActionResult Index()
         {
@@ -50,7 +31,7 @@ namespace CanvasCourseCreator.Controllers
 
             var vSchools = from s in SISdb.schools
                            where s.schyear == schoolYear
-                           where accountIDs.Keys.Contains(s.schoolc)
+                           where AccountIDs.Keys.Contains(s.schoolc)
                            orderby s.schname
                            select s
                            ;
@@ -104,7 +85,7 @@ namespace CanvasCourseCreator.Controllers
 
             //get the account id
             int accountId;
-            accountIDs.TryGetValue(sisSchool.schoolc, out accountId);
+            AccountIDs.TryGetValue(sisSchool.schoolc, out accountId);
 
             //make sure the course doesn't exist
             CanvasCourseModel vCourse = GetCourse(crsuniq, funiq, schuniq);
@@ -138,7 +119,7 @@ namespace CanvasCourseCreator.Controllers
        
 
             //send the data
-            string createCourseURL = canvasURL + "accounts/" + accountId + "/courses?access_token=" + oAuthKey;
+            string createCourseURL = CanvasUrl + "accounts/" + accountId + "/courses?access_token=" + OAuthKey;
             var httpWebRequest = (HttpWebRequest)WebRequest.Create(createCourseURL);
             httpWebRequest.ContentType = "application/json";
             httpWebRequest.Method = "POST";
@@ -192,7 +173,7 @@ namespace CanvasCourseCreator.Controllers
 
 
             //send the data
-            string createEnrollmentURL = canvasURL + "courses/" + courseId + "/enrollments?access_token=" + oAuthKey;
+            string createEnrollmentURL = CanvasUrl + "courses/" + courseId + "/enrollments?access_token=" + OAuthKey;
             var httpWebRequest = (HttpWebRequest)WebRequest.Create(createEnrollmentURL);
             httpWebRequest.ContentType = "application/json";
             httpWebRequest.Method = "POST";
@@ -276,10 +257,10 @@ namespace CanvasCourseCreator.Controllers
 
             //get the account id
             int accountId;
-            accountIDs.TryGetValue(sisSchool.schoolc, out accountId);
+            AccountIDs.TryGetValue(sisSchool.schoolc, out accountId);
             using (var client = new WebClient())
             {
-                string getCourseURL = canvasURL + "accounts/" + accountId + "/courses/?per_page=999999999999&access_token=" + oAuthKey;
+                string getCourseURL = CanvasUrl + "accounts/" + accountId + "/courses/?per_page=999999999999&access_token=" + OAuthKey;
                 var json = client.DownloadString(getCourseURL);
                 var serializer = new JavaScriptSerializer();
                 List<CanvasCourseModel> courses = serializer.Deserialize<List<CanvasCourseModel>>(json);
@@ -301,8 +282,8 @@ namespace CanvasCourseCreator.Controllers
             {
                 try
                 {
-                    string getCourseURL = canvasURL + "courses/sis_course_id:" + sisId +
-                                          "/?per_page=999999999999&access_token=" + oAuthKey;
+                    string getCourseURL = CanvasUrl + "courses/sis_course_id:" + sisId +
+                                          "/?per_page=999999999999&access_token=" + OAuthKey;
                     var json = client.DownloadString(getCourseURL);
                     var serializer = new JavaScriptSerializer();
                     List<CanvasCourseModel> courses = serializer.Deserialize<List<CanvasCourseModel>>(json);
@@ -372,7 +353,7 @@ namespace CanvasCourseCreator.Controllers
             try {
                 using (var client = new WebClient())
                 {
-                    string getCourseURL = canvasURL + "sections/sis_section_id:" + sectionId + "?access_token=" + oAuthKey;
+                    string getCourseURL = CanvasUrl + "sections/sis_section_id:" + sectionId + "?access_token=" + OAuthKey;
                     var json = client.DownloadString(getCourseURL);
                     var serializer = new JavaScriptSerializer();
                     section = serializer.Deserialize<CanvasSectionModel>(json);
@@ -381,7 +362,7 @@ namespace CanvasCourseCreator.Controllers
             }
             catch (Exception e)
             {
-                //EmailSender.EmailSender.sendImportantMessage("CanvasError@sjsd.org", new string[] {"dbrown@sjsd.org"},"Error getting section: " + sectionId, "Exception: " + e.Message);
+                //EmailSender.EmailSender.sendImportantMessage("CanvasError@sjsd.org", Globals.EMAIL_ADDRESSES,"Error getting section: " + sectionId, "Exception: " + e.Message);
                 return null;
             }
         }
@@ -393,7 +374,7 @@ namespace CanvasCourseCreator.Controllers
             {
                 using (var client = new WebClient())
                 {
-                    string getCourseURL = canvasURL + "sections/" + sectionId + "?access_token=" + oAuthKey;
+                    string getCourseURL = CanvasUrl + "sections/" + sectionId + "?access_token=" + OAuthKey;
                     var json = client.DownloadString(getCourseURL);
                     var serializer = new JavaScriptSerializer();
                     section = serializer.Deserialize<CanvasSectionModel>(json);
@@ -402,7 +383,7 @@ namespace CanvasCourseCreator.Controllers
             }
             catch (Exception e)
             {
-                //EmailSender.EmailSender.sendImportantMessage("CanvasError@sjsd.org", new string[] {"dbrown@sjsd.org"},"Error getting section: " + sectionId, "Exception: " + e.Message);
+                //EmailSender.EmailSender.sendImportantMessage("CanvasError@sjsd.org", Globals.EMAIL_ADDRESSES,"Error getting section: " + sectionId, "Exception: " + e.Message);
                 return null;
             }
         }
@@ -410,7 +391,7 @@ namespace CanvasCourseCreator.Controllers
         private List<CanvasSectionModel> GetCourseSections(string courseId)
         {
             //get all the course sections
-            string getSectionUrl = canvasURL + "courses/" + courseId + "/sections?access_token=" + oAuthKey;
+            string getSectionUrl = CanvasUrl + "courses/" + courseId + "/sections?access_token=" + OAuthKey;
             try
             {
                 using (var client = new WebClient())
@@ -424,7 +405,7 @@ namespace CanvasCourseCreator.Controllers
             }
             catch (Exception e)
             {
-                EmailSender.EmailSender.sendImportantMessage("CanvasError@sjsd.org", new string[] {"dbrown@sjsd.org"},
+                EmailSender.EmailSender.sendImportantMessage("CanvasError@sjsd.org", Globals.EMAIL_ADDRESSES,
                     "Error getting sections", "Exception: " + e.Message);
                 return null;
             }
@@ -438,7 +419,7 @@ namespace CanvasCourseCreator.Controllers
             {
                 try
                 {
-                    string getCourseURL = canvasURL + "courses/" + courseId + "?access_token=" + oAuthKey;
+                    string getCourseURL = CanvasUrl + "courses/" + courseId + "?access_token=" + OAuthKey;
                     var json = client.DownloadString(getCourseURL);
                     var serializer = new JavaScriptSerializer();
                     course = serializer.Deserialize<CanvasCourseModel>(json);
@@ -547,7 +528,7 @@ namespace CanvasCourseCreator.Controllers
                 message += "</ul>";
 
                 EmailSender.EmailSender.sendTemplatedMessage("CanvasEnrollmentError@sjsd.org",
-                    new string[] {"dbrown@sjsd.org", "jdecker@sjsd.org"},"Failed to enroll students in class", message, "High");
+                    Globals.EMAIL_ADDRESSES,"Failed to enroll students in class", message, "High");
             }
 
 
@@ -572,8 +553,8 @@ namespace CanvasCourseCreator.Controllers
                 string unEnrollmentJson = "{\"task\": \"conclude\"}";
 
                 //send the data
-                string removeEnrollmentURL = canvasURL + "courses/" + canvasCourseId + "/enrollments/" + enrollment.id +
-                                             "?access_token=" + oAuthKey;
+                string removeEnrollmentURL = CanvasUrl + "courses/" + canvasCourseId + "/enrollments/" + enrollment.id +
+                                             "?access_token=" + OAuthKey;
                 var httpWebRequest = (HttpWebRequest) WebRequest.Create(removeEnrollmentURL);
                 httpWebRequest.ContentType = "application/json";
                 httpWebRequest.Method = "DELETE";
@@ -622,7 +603,7 @@ namespace CanvasCourseCreator.Controllers
        
 
             //send the data
-            string createEnrollmentURL = canvasURL + "sections/" + canvasSectionId + "/enrollments?access_token=" + oAuthKey;
+            string createEnrollmentURL = CanvasUrl + "sections/" + canvasSectionId + "/enrollments?access_token=" + OAuthKey;
             var httpWebRequest = (HttpWebRequest)WebRequest.Create(createEnrollmentURL);
             httpWebRequest.ContentType = "application/json";
             httpWebRequest.Method = "POST";
@@ -657,7 +638,7 @@ namespace CanvasCourseCreator.Controllers
 
             //get the account id
             int accountId;
-            accountIDs.TryGetValue(sisSchool.schoolc, out accountId);
+            AccountIDs.TryGetValue(sisSchool.schoolc, out accountId);
 
             //make sure the user doesn't exist
             CanvasUserModel user = GetUserBySISId("F" + funiq);
@@ -688,7 +669,7 @@ namespace CanvasCourseCreator.Controllers
 
 
             //send the data
-            string createUserURL = canvasURL + "accounts/" + accountId + "/users?access_token=" + oAuthKey;
+            string createUserURL = CanvasUrl + "accounts/" + accountId + "/users?access_token=" + OAuthKey;
             var httpWebRequest = (HttpWebRequest)WebRequest.Create(createUserURL);
             httpWebRequest.ContentType = "application/json";
             httpWebRequest.Method = "POST";
@@ -723,7 +704,7 @@ namespace CanvasCourseCreator.Controllers
 
             //get the account id
             int accountId;
-            accountIDs.TryGetValue(sisSchool.schoolc, out accountId);
+            AccountIDs.TryGetValue(sisSchool.schoolc, out accountId);
 
             //make sure the user doesn't exist
             CanvasUserModel user = GetUserBySISId(suniq.ToString());
@@ -754,7 +735,7 @@ namespace CanvasCourseCreator.Controllers
        
 
             //send the data
-            string createUserURL = canvasURL + "accounts/" + accountId + "/users?access_token=" + oAuthKey;
+            string createUserURL = CanvasUrl + "accounts/" + accountId + "/users?access_token=" + OAuthKey;
             var httpWebRequest = (HttpWebRequest)WebRequest.Create(createUserURL);
             httpWebRequest.ContentType = "application/json";
             httpWebRequest.Method = "POST";
@@ -796,7 +777,7 @@ namespace CanvasCourseCreator.Controllers
             {
                 try
                 {
-                    string getUserURL = canvasURL + "users/" + canvasUserId + "/enrollments?access_token=" + oAuthKey;
+                    string getUserURL = CanvasUrl + "users/" + canvasUserId + "/enrollments?access_token=" + OAuthKey;
                     var json = client.DownloadString(getUserURL);
                     var serializer = new JavaScriptSerializer();
                     List<CanvasEnrollmentModel> enrollments = serializer.Deserialize<List<CanvasEnrollmentModel>>(json);
@@ -818,7 +799,7 @@ namespace CanvasCourseCreator.Controllers
             {
                 try
                 {
-                    string getUserURL = canvasURL + "users/" + Id + "/profile?access_token=" + oAuthKey;
+                    string getUserURL = CanvasUrl + "users/" + Id + "/profile?access_token=" + OAuthKey;
                     var json = client.DownloadString(getUserURL);
                     var serializer = new JavaScriptSerializer();
                     user = serializer.Deserialize<CanvasUserModel>(json);
@@ -838,7 +819,7 @@ namespace CanvasCourseCreator.Controllers
             {
                 try
                 {
-                    string getUserURL = canvasURL + "users/sis_user_id:" + sisId + "/profile?access_token=" + oAuthKey;
+                    string getUserURL = CanvasUrl + "users/sis_user_id:" + sisId + "/profile?access_token=" + OAuthKey;
                     var json = client.DownloadString(getUserURL);
                     var serializer = new JavaScriptSerializer();
                     user = serializer.Deserialize<CanvasUserModel>(json);
@@ -856,7 +837,7 @@ namespace CanvasCourseCreator.Controllers
 
             using (var client = new WebClient())
             {
-                string getCourseURL = canvasURL + "sections/" + canvasSectionId + "/enrollments/?per_page=999999999999&access_token=" + oAuthKey;
+                string getCourseURL = CanvasUrl + "sections/" + canvasSectionId + "/enrollments/?per_page=999999999999&access_token=" + OAuthKey;
                 var json = client.DownloadString(getCourseURL);
                 var serializer = new JavaScriptSerializer();
                 List<CanvasEnrollmentModel> enrollments = serializer.Deserialize<List<CanvasEnrollmentModel>>(json);
@@ -909,7 +890,7 @@ namespace CanvasCourseCreator.Controllers
                                     "\"name\": \"" + period.trkcr.course.descript + " : " + period.facdemo.lastname.Trim() + " " + period.facdemo.firstname.Trim() +  " : " + period.mstmeets.First().periodn + "\"," +
                                     "\"sis_section_id\": \"" + schoolYear + ":" + period.mstuniq + ":" + period.funiq + "\"}}";
 
-                    string createSectionUrl = canvasURL + "courses/" + courseId + "/sections?access_token=" + oAuthKey;
+                    string createSectionUrl = CanvasUrl + "courses/" + courseId + "/sections?access_token=" + OAuthKey;
                     var httpWebRequest = (HttpWebRequest) WebRequest.Create(createSectionUrl);
                     httpWebRequest.ContentType = "application/json";
                     httpWebRequest.Method = "POST";
