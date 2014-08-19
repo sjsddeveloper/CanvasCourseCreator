@@ -11,6 +11,7 @@
     <EntitySet Name="stusched" EntityType="SJSDDBModel.Store.stusched" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="track" EntityType="SJSDDBModel.Store.track" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="trkcrs" EntityType="SJSDDBModel.Store.trkcrs" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Users" EntityType="SJSDDBModel.Store.Users" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="facdemo_facstat_FK" Association="SJSDDBModel.Store.facdemo_facstat_FK">
       <End Role="facstat" EntitySet="facstat" />
       <End Role="facdemo" EntitySet="facdemo" />
@@ -50,6 +51,14 @@
     <AssociationSet Name="FK_trkcrs_track" Association="SJSDDBModel.Store.FK_trkcrs_track">
       <End Role="track" EntitySet="track" />
       <End Role="trkcrs" EntitySet="trkcrs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_facdemo" Association="SJSDDBModel.Store.FK_Users_facdemo">
+      <End Role="facdemo" EntitySet="facdemo" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_studemo" Association="SJSDDBModel.Store.FK_Users_studemo">
+      <End Role="studemo" EntitySet="studemo" />
+      <End Role="Users" EntitySet="Users" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="course">
@@ -407,6 +416,33 @@
     <Property Name="lograden" Type="decimal" Precision="2" />
     <Property Name="higraden" Type="decimal" Precision="2" />
   </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Username" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="funiq" Type="int" />
+    <Property Name="suniq" Type="int" />
+    <Property Name="conuniq" Type="int" />
+    <Property Name="CanSelectDatabase" Type="bit" Nullable="false" />
+    <Property Name="CanImpersonate" Type="bit" Nullable="false" />
+    <Property Name="LastImpersonateUserName" Type="varchar" MaxLength="50" />
+    <Property Name="Password" Type="nvarchar" />
+    <Property Name="PasswordSalt" Type="binary" MaxLength="16" />
+    <Property Name="PasswordHash" Type="binary" MaxLength="48" />
+    <Property Name="TemporaryPassword" Type="nvarchar" />
+    <Property Name="TemporaryPasswordSalt" Type="binary" MaxLength="16" />
+    <Property Name="TemporaryPasswordHash" Type="binary" MaxLength="48" />
+    <Property Name="MustChangePassword" Type="bit" Nullable="false" />
+    <Property Name="LoginAttempts" Type="smallint" Nullable="false" />
+    <Property Name="LockedUntil" Type="datetime" />
+    <Property Name="LockedReason" Type="nvarchar" MaxLength="255" />
+    <Property Name="LoginDate" Type="datetime" />
+    <Property Name="LastUserSessionID" Type="int" />
+    <Property Name="LastImpersonateSessionID" Type="int" />
+    <Property Name="UserGUID" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
   <Association Name="facdemo_facstat_FK">
     <End Role="facstat" Type="SJSDDBModel.Store.facstat" Multiplicity="0..1" />
     <End Role="facdemo" Type="SJSDDBModel.Store.facdemo" Multiplicity="*" />
@@ -524,6 +560,34 @@
       </Principal>
       <Dependent Role="trkcrs">
         <PropertyRef Name="trkuniq" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_facdemo">
+    <End Role="facdemo" Type="SJSDDBModel.Store.facdemo" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Users" Type="SJSDDBModel.Store.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="facdemo">
+        <PropertyRef Name="funiq" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="funiq" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_studemo">
+    <End Role="studemo" Type="SJSDDBModel.Store.studemo" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Users" Type="SJSDDBModel.Store.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="studemo">
+        <PropertyRef Name="suniq" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="suniq" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

@@ -18,6 +18,7 @@ namespace CanvasCourseCreator.Models
         {
             this.facstats = new HashSet<facstat>();
             this.mstscheds = new HashSet<mstsched>();
+            this.Users = new HashSet<User>();
         }
     
         public int funiq { get; set; }
@@ -66,5 +67,6 @@ namespace CanvasCourseCreator.Models
         public virtual facstat facstat { get; set; }
         public virtual ICollection<facstat> facstats { get; set; }
         public virtual ICollection<mstsched> mstscheds { get; set; }
+        public virtual ICollection<User> Users { get; set; }
     }
 }

@@ -363,5 +363,33 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="SJSDDBModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="UserGUID" ColumnName="UserGUID" />
+          <ScalarProperty Name="LastImpersonateSessionID" ColumnName="LastImpersonateSessionID" />
+          <ScalarProperty Name="LastUserSessionID" ColumnName="LastUserSessionID" />
+          <ScalarProperty Name="LoginDate" ColumnName="LoginDate" />
+          <ScalarProperty Name="LockedReason" ColumnName="LockedReason" />
+          <ScalarProperty Name="LockedUntil" ColumnName="LockedUntil" />
+          <ScalarProperty Name="LoginAttempts" ColumnName="LoginAttempts" />
+          <ScalarProperty Name="MustChangePassword" ColumnName="MustChangePassword" />
+          <ScalarProperty Name="TemporaryPasswordHash" ColumnName="TemporaryPasswordHash" />
+          <ScalarProperty Name="TemporaryPasswordSalt" ColumnName="TemporaryPasswordSalt" />
+          <ScalarProperty Name="TemporaryPassword" ColumnName="TemporaryPassword" />
+          <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+          <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="LastImpersonateUserName" ColumnName="LastImpersonateUserName" />
+          <ScalarProperty Name="CanImpersonate" ColumnName="CanImpersonate" />
+          <ScalarProperty Name="CanSelectDatabase" ColumnName="CanSelectDatabase" />
+          <ScalarProperty Name="conuniq" ColumnName="conuniq" />
+          <ScalarProperty Name="suniq" ColumnName="suniq" />
+          <ScalarProperty Name="funiq" ColumnName="funiq" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

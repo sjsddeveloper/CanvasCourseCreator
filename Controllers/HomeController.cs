@@ -157,7 +157,8 @@ namespace CanvasCourseCreator.Controllers
 
         private void AssignTeacherToCourse(int funiq, string courseId, int schuniq)
         {
-            CanvasUserModel teacher = GetUserBySISId("F" + funiq);
+            User facUser = SISdb.Users.FirstOrDefault(u => u.funiq == funiq);
+            CanvasUserModel teacher = GetUserBySISId(facUser.Username);
             if (teacher == null)
             {
                 teacher = CreateCanvasTeacher(funiq, schuniq);

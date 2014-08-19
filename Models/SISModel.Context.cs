@@ -35,5 +35,6 @@ namespace CanvasCourseCreator.Models
         public DbSet<trkcr> trkcrs { get; set; }
         public DbSet<mstmeet> mstmeets { get; set; }
         public DbSet<mstsched> mstscheds { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }

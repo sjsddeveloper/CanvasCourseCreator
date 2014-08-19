@@ -17,6 +17,7 @@ namespace CanvasCourseCreator.Models
         public studemo()
         {
             this.stuscheds = new HashSet<stusched>();
+            this.Users = new HashSet<User>();
         }
     
         public int suniq { get; set; }
@@ -108,5 +109,6 @@ namespace CanvasCourseCreator.Models
         public bool OverrideGraduationYear { get; set; }
     
         public virtual ICollection<stusched> stuscheds { get; set; }
+        public virtual ICollection<User> Users { get; set; }
     }
 }

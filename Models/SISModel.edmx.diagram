@@ -25,6 +25,9 @@
         <AssociationConnector Association="SJSDDBModel.FK_mstmeet_mstsched" />
         <AssociationConnector Association="SJSDDBModel.FK_stusched_mstmeet" />
         <AssociationConnector Association="SJSDDBModel.FK_mstsched_trkcrs" />
+        <EntityTypeShape EntityType="SJSDDBModel.User" Width="1.5" PointX="13.5" PointY="17.875" />
+        <AssociationConnector Association="SJSDDBModel.FK_Users_facdemo" />
+        <AssociationConnector Association="SJSDDBModel.FK_Users_studemo" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

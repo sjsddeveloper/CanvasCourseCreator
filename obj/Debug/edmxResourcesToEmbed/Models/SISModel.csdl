@@ -51,6 +51,15 @@
       <End Role="trkcr" EntitySet="trkcrs" />
       <End Role="mstsched" EntitySet="mstscheds" />
     </AssociationSet>
+    <EntitySet Name="Users" EntityType="SJSDDBModel.User" />
+    <AssociationSet Name="FK_Users_facdemo" Association="SJSDDBModel.FK_Users_facdemo">
+      <End Role="facdemo" EntitySet="facdemoes" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_studemo" Association="SJSDDBModel.FK_Users_studemo">
+      <End Role="studemo" EntitySet="studemoes" />
+      <End Role="User" EntitySet="Users" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="course">
     <Key>
@@ -134,6 +143,7 @@
     <NavigationProperty Name="facstat" Relationship="SJSDDBModel.facdemo_facstat_FK" FromRole="facdemo" ToRole="facstat" />
     <NavigationProperty Name="facstats" Relationship="SJSDDBModel.FK_facstat_facdemo" FromRole="facdemo" ToRole="facstat" />
     <NavigationProperty Name="mstscheds" Relationship="SJSDDBModel.FK_mstsched_facdemo" FromRole="facdemo" ToRole="mstsched" />
+    <NavigationProperty Name="Users" Relationship="SJSDDBModel.FK_Users_facdemo" FromRole="facdemo" ToRole="User" />
   </EntityType>
   <EntityType Name="facstat">
     <Key>
@@ -292,6 +302,7 @@
     <Property Type="Boolean" Name="SpecifyPreferredNames" Nullable="false" />
     <Property Type="Boolean" Name="IsConditionalAdmission" Nullable="false" />
     <Property Type="Boolean" Name="OverrideGraduationYear" Nullable="false" />
+    <NavigationProperty Name="Users" Relationship="SJSDDBModel.FK_Users_studemo" FromRole="studemo" ToRole="User" />
   </EntityType>
   <EntityType Name="stusched">
     <Key>
@@ -541,6 +552,63 @@
       </Principal>
       <Dependent Role="mstsched">
         <PropertyRef Name="trkcrsuniq" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Type="Int32" Name="UserID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Username" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="funiq" />
+    <Property Type="Int32" Name="suniq" />
+    <Property Type="Int32" Name="conuniq" />
+    <Property Type="Boolean" Name="CanSelectDatabase" Nullable="false" />
+    <Property Type="Boolean" Name="CanImpersonate" Nullable="false" />
+    <Property Type="String" Name="LastImpersonateUserName" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Password" MaxLength="4000" FixedLength="false" Unicode="true" />
+    <Property Type="Binary" Name="PasswordSalt" MaxLength="16" FixedLength="true" />
+    <Property Type="Binary" Name="PasswordHash" MaxLength="48" FixedLength="true" />
+    <Property Type="String" Name="TemporaryPassword" MaxLength="4000" FixedLength="false" Unicode="true" />
+    <Property Type="Binary" Name="TemporaryPasswordSalt" MaxLength="16" FixedLength="true" />
+    <Property Type="Binary" Name="TemporaryPasswordHash" MaxLength="48" FixedLength="true" />
+    <Property Type="Boolean" Name="MustChangePassword" Nullable="false" />
+    <Property Type="Int16" Name="LoginAttempts" Nullable="false" />
+    <Property Type="DateTime" Name="LockedUntil" Precision="3" />
+    <Property Type="String" Name="LockedReason" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Type="DateTime" Name="LoginDate" Precision="3" />
+    <Property Type="Int32" Name="LastUserSessionID" />
+    <Property Type="Int32" Name="LastImpersonateSessionID" />
+    <Property Type="Guid" Name="UserGUID" Nullable="false" />
+    <NavigationProperty Name="facdemo" Relationship="SJSDDBModel.FK_Users_facdemo" FromRole="User" ToRole="facdemo" />
+    <NavigationProperty Name="studemo" Relationship="SJSDDBModel.FK_Users_studemo" FromRole="User" ToRole="studemo" />
+  </EntityType>
+  <Association Name="FK_Users_facdemo">
+    <End Type="SJSDDBModel.facdemo" Role="facdemo" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="SJSDDBModel.User" Role="User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="facdemo">
+        <PropertyRef Name="funiq" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="funiq" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_studemo">
+    <End Type="SJSDDBModel.studemo" Role="studemo" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="SJSDDBModel.User" Role="User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="studemo">
+        <PropertyRef Name="suniq" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="suniq" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
