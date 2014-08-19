@@ -16,7 +16,6 @@ using Newtonsoft.Json;
 
 namespace CanvasCourseCreator.Controllers
 {
-    [Authorize(Roles = "gg_application_admin")]
     public class HomeController : Controller
     {
         private readonly SJSDDBEntities SISdb = new SJSDDBEntities();
